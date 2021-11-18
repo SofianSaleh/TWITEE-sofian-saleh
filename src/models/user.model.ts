@@ -8,6 +8,7 @@ export interface UserDocument extends Document {
   password: string;
   createdAt: Date;
   updatedAt: Date;
+  comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
 const UserSchema = new Schema(
