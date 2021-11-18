@@ -21,7 +21,7 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
-UserSchema.pre('save', async (next) => {
+UserSchema.pre('save', async function (next) {
   let user = this as UserDocument;
   if (!user.isModified('password')) {
     return next();
@@ -32,9 +32,9 @@ UserSchema.pre('save', async (next) => {
   return next();
 });
 
-UserSchema.methods.comparePassword = async (
+UserSchema.methods.comparePassword = function (
   candidatePassword: string
-): Promise<boolean> => {
+): Promise<boolean> {
   let user = this as UserDocument;
 
   return compare(candidatePassword, user.password).catch((e) => false);
