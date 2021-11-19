@@ -29,5 +29,5 @@ export async function validatePassword({
 
   if (!isValid) return false;
 
-  return omit(user.toJSON(), 'password');
+  return omit(user.toObject(), 'password');
 }

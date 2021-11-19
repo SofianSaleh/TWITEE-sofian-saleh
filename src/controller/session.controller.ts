@@ -22,4 +22,6 @@ export async function createUserSessionHandler(req: Request, res: Response) {
     { ...user, session: session.id },
     { expiresIn: config.get<string>('refreshTokenTtl') }
   ); // Return access and  refresh Token
+
+  return res.status(200).send({ accessToken, refreshToken });
 }
