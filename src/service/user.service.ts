@@ -15,7 +15,13 @@ export const createUser = async (
   }
 };
 
-export async function validatePassword(email: string, password: string) {
+export async function validatePassword({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) {
   const user = await UserModel.findOne({ email });
   if (!user) return false;
 
