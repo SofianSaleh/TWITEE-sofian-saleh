@@ -1,11 +1,46 @@
-import { FilterQuery } from 'mongoose';
+import { FilterQuery, UpdateQuery } from 'mongoose';
 import SessionModel, { SessionDocument } from '../models/session.model';
+import { verifyJwt, signJwt } from '../utils/jwt.utils';
+import { get } from 'lodash';
+import config from 'config';
+
+import { findUser } from './user.service';
 
 export async function createSession(userId: string, userAgent: string) {
-  const session = await SessionModel.create({ user: userId, userAgent });
-  return session.toJSON();
+  const session = await (
+    await SessionModel.create({ user: userId, userAgent })
+  ).get('_id');
+  return session;
 }
 
 export async function getSessions(query: FilterQuery<SessionDocument>) {
   return await SessionModel.find(query).lean();
+}
+
+export async function updateSessions(
+  query: FilterQuery<SessionDocument>,
+  update: UpdateQuery<SessionDocument>
+) {
+  return await SessionModel.updateOne(query, update);
+}
+
+export async function reIssueAccessToken(refreshToken: string) {
+  // Verify refreshToken
+  const { decoded, expired } = verifyJwt(refreshToken);
+  // If valid return a new access  Token
+  if (!decoded && get(decoded, 'session')) return false;
+
+  const session = await SessionModel.findById(get(decoded, 'session'));
+
+  if (!session || !session.valid) return false;
+
+  const user = await findUser({ _id: session.user });
+  if (!user) return false;
+  let x = { ...user };
+  const accessToken = signJwt(
+    { ...user, session: session._id },
+    { expiresIn: config.get<string>('accessTokenTtl') }
+  );
+
+  return accessToken;
 }

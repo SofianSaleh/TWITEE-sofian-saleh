@@ -8,7 +8,7 @@ const publicKey = config.get<string>('publicKey');
 
 export function signJwt(object: Object, options?: jwt.SignOptions | undefined) {
   // The algorith RS256 allows to use public and private keys
-  logger.info(options && options);
+
   return jwt.sign(object, privateKey, {
     ...(options && options),
     algorithm: 'RS256',
@@ -17,11 +17,11 @@ export function signJwt(object: Object, options?: jwt.SignOptions | undefined) {
 
 export function verifyJwt(token: string) {
   try {
-    const decoded = jwt.verify(token, publicKey);
+    const decoded = jwt.verify(token, publicKey, { algorithms: ['RS256'] });
     return {
       valid: true,
       expired: false,
-      decoded: decoded,
+      decoded,
     };
   } catch (e: any) {
     return {
