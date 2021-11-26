@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { CommentDocument } from './coment.model';
+import { CommentDocument } from './comment.model';
 import { UserDocument } from './user.model';
 
 export interface TweetDocument extends mongoose.Document {
