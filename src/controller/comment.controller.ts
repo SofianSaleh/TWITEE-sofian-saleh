@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import {
   createComment,
   getAllCommentsOnTweet,
+  updateComment,
 } from '../service/comment.service';
 
 export const createCommentHandler = async (req: Request, res: Response) => {
@@ -23,6 +24,17 @@ export const getAllCommentsOnTweetHandler = async (
   try {
     const { id } = req.params;
     const comments = await getAllCommentsOnTweet(id);
+    return res.status(200).send(comments);
+  } catch (e: any) {
+    res.status(400).send(e.message);
+  }
+};
+
+export const updateCommentHandler = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const user = res.locals.user;
+    const comments = await updateComment(req.body, id, user);
     return res.status(200).send(comments);
   } catch (e: any) {
     res.status(400).send(e.message);

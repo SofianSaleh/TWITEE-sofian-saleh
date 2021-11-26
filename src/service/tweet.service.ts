@@ -34,7 +34,9 @@ export const getYourTweets = async (userId: string) => {
  */
 export const getTweet = async (tweetId: string) => {
   try {
-    return await TweetModel.findOne({ _id: tweetId }).populate('owner').exec();
+    return await TweetModel.findOne({ _id: tweetId })
+      .populate('owner', 'email name')
+      .exec();
   } catch (e: any) {
     throw e;
   }
@@ -77,13 +79,17 @@ export const likeTweet = async (tweetId: string, user: any) => {
     throw e;
   }
 };
-
+/**
+ *
+ * @param tweetId String
+ * @returns The tweet with all the people who liked populated
+ */
 export const getAllLikesForTweet = async (tweetId: string) => {
   try {
     let tweet = await getTweet(tweetId);
     if (!tweet)
       return { success: false, tweet: null, msg: ` Couldn't find tweet` };
-    let likes = await tweet?.populate('likedUser');
+    let likes = await tweet?.populate('likedUser', 'name email');
     return { success: true, tweet: likes, msg: 'Populated All Likes' };
   } catch (e: any) {
     throw e;

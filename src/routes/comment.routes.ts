@@ -8,6 +8,7 @@ import { createCommentSchema } from '../schema/comment.schema';
 import {
   createCommentHandler,
   getAllCommentsOnTweetHandler,
+  updateCommentHandler,
 } from '../controller/comment.controller';
 const router = express.Router();
 
@@ -19,4 +20,10 @@ router.post(
 );
 
 router.get(`/all/:id`, requireUser, getAllCommentsOnTweetHandler);
+router.put(
+  '/update/:id',
+  requireUser,
+  validateResource(createCommentSchema),
+  updateCommentHandler
+);
 export default router;

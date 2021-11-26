@@ -3,7 +3,7 @@ import { UserDocument } from './user.model';
 
 export interface CommentDocument extends mongoose.Document {
   owner: [UserDocument['_id']];
-
+  isEdited: boolean;
   content: string;
   createdAt: Date;
   updatedAt: Date;
@@ -17,6 +17,7 @@ const CommentSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
+    isEdited: { type: boolean, default: false },
   },
   { timestamps: true }
 );
