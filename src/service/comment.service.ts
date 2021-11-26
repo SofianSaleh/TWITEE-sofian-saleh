@@ -33,8 +33,8 @@ export const getComment = async (commentId: string) => {
       'name email'
     );
     if (!comment)
-      return { success: false, msg: `Couldn't find comment`, comment: null };
-    return { success: true, msg: `Found comment`, comment };
+      return { success: false, msg: `Couldn't find comment`, data: null };
+    return { success: true, msg: `Found comment`, data: comment };
   } catch (e: any) {
     throw e;
   }
@@ -58,15 +58,27 @@ export const updateComment = async (
   user: any
 ) => {
   try {
-    let { success, comment, msg } = await getComment(commentId);
-    if (!success) return { success, comment, msg };
-    if (user._id != comment?.owner?.id)
+    let { success, data, msg } = await getComment(commentId);
+    if (!success && !data) return { success, data, msg };
+    if (user._id != data?.owner?._id)
       return { success: false, comment: null, msg: `Forbidden` };
-    comment?.content = newContent.content;
-    comment?.isEdited = true;
-    await comment?.save();
+    data.content = newContent.content;
+    data.isEdited = true;
+    await data?.save();
 
-    return { success: true, comment, msg: `Updated Successfully` };
+    return { success: true, data, msg: `Updated Successfully` };
+  } catch (e: any) {
+    throw e;
+  }
+};
+
+export const deleteComment = async (commentId: string, user: any) => {
+  try {
+    let comment = await getComment(commentId);
+    if (!comment.success && !comment.data) return comment;
+    if (user._id !== comment.data.owner._id)
+      return { success: false, comment: null, msg: `Forbidden` };
+    console.log(comment.data.owner._id == user._id);
   } catch (e: any) {
     throw e;
   }

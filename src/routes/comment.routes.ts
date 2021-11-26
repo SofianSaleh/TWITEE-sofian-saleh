@@ -7,6 +7,7 @@ import requireUser from '../middleware/requireUser';
 import { createCommentSchema } from '../schema/comment.schema';
 import {
   createCommentHandler,
+  deleteCommentHandler,
   getAllCommentsOnTweetHandler,
   getCommentHandler,
   updateCommentHandler,
@@ -28,4 +29,5 @@ router.put(
   validateResource(createCommentSchema),
   updateCommentHandler
 );
+router.delete(`/:id`, requireUser, deleteCommentHandler);
 export default router;
