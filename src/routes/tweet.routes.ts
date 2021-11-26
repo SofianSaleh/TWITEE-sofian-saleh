@@ -6,6 +6,7 @@ import { createTweetSchema } from '../schema/tweet.schema';
 import {
   createTweetHandler,
   deleteTweetHandler,
+  getAllLikesTweetHandler,
   getTweetHandler,
   getYourTweetsHandler,
   likeTweetHandler,
@@ -23,6 +24,7 @@ router.post(
 router.get('/mytweets', requireUser, getYourTweetsHandler);
 router.get('/:id', requireUser, getTweetHandler);
 router.delete('/:id', requireUser, deleteTweetHandler);
-router.get('/like/:id', requireUser, likeTweetHandler);
+router.post('/like/:id', requireUser, likeTweetHandler);
+router.get('/like/:id', requireUser, getAllLikesTweetHandler);
 
 export default router;

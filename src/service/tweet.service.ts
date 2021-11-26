@@ -34,7 +34,7 @@ export const getYourTweets = async (userId: string) => {
  */
 export const getTweet = async (tweetId: string) => {
   try {
-    return await TweetModel.findOne({ _id: tweetId }).exec();
+    return await TweetModel.findOne({ _id: tweetId }).populate('owner').exec();
   } catch (e: any) {
     throw e;
   }
@@ -73,6 +73,18 @@ export const likeTweet = async (tweetId: string, user: any) => {
     tweet?.likedUser?.push(user);
     await tweet.save();
     return { success: true, tweet, msg: `Liked Successfully` };
+  } catch (e: any) {
+    throw e;
+  }
+};
+
+export const getAllLikesForTweet = async (tweetId: string) => {
+  try {
+    let tweet = await getTweet(tweetId);
+    if (!tweet)
+      return { success: false, tweet: null, msg: ` Couldn't find tweet` };
+    let likes = await tweet?.populate('likedUser');
+    return { success: true, tweet: likes, msg: 'Populated All Likes' };
   } catch (e: any) {
     throw e;
   }

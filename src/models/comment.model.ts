@@ -3,7 +3,7 @@ import { UserDocument } from './user.model';
 
 export interface CommentDocument extends mongoose.Document {
   owner: [UserDocument['_id']];
- 
+
   content: string;
   createdAt: Date;
   updatedAt: Date;
@@ -21,6 +21,6 @@ const CommentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const CommentModel = mongoose.model<CommentDocument>('(Comment', CommentSchema);
+const CommentModel = mongoose.model<CommentDocument>('Comment', CommentSchema);
 
 export default CommentModel;
