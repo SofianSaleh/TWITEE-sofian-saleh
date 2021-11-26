@@ -24,11 +24,12 @@ export const likeTweet = async (tweetId: string, user: any) => {
 
 export const unlikeTweet = async (tweetId: string, user: any) => {
   try {
-    const tweet = await TweetModel.findOne(
+    console.log(tweetId, user._id);
+    const tweet = await TweetModel.findOneAndUpdate(
       { _id: tweetId, likedUser: user._id },
       { $pull: { likedUser: user._id } }
     );
-
+    console.log(tweet);
     if (!tweet) return { success: false, msg: `Couldn't find tweet` };
 
     return { success: true, tweet, msg: `Liked Successfully` };
