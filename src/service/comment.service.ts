@@ -60,6 +60,9 @@ export const updateComment = async (
   try {
     let { success, data, msg } = await getComment(commentId);
     if (!success && !data) return { success, data, msg };
+
+    if (!data?.owner)
+      return { success: false, msg: `User Doesn't exist`, data: null };
     if (user._id != data?.owner?._id)
       return { success: false, comment: null, msg: `Forbidden` };
     data.content = newContent.content;

@@ -6,6 +6,7 @@ import {
   deleteTweet,
   likeTweet,
   getAllLikesForTweet,
+  updateTweet,
 } from '../service/tweet.service';
 
 export const createTweetHandler = async (req: Request, res: Response) => {
@@ -33,6 +34,17 @@ export const getTweetHandler = async (req: Request, res: Response) => {
     const { id } = req.params;
     const tweet = await getTweet(id);
     res.status(200).send({ count: 1, tweet });
+  } catch (e: any) {
+    res.status(400).send(e.message);
+  }
+};
+
+export const updateTweetHandler = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const user = res.locals.user;
+    const tweet = await updateTweet(id, req.body, user);
+    res.status(200).send(tweet);
   } catch (e: any) {
     res.status(400).send(e.message);
   }

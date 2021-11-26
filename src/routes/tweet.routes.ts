@@ -10,6 +10,7 @@ import {
   getTweetHandler,
   getYourTweetsHandler,
   likeTweetHandler,
+  updateTweetHandler,
 } from '../controller/tweets.controller';
 
 const router = express.Router();
@@ -23,6 +24,12 @@ router.post(
 
 router.get('/mytweets', requireUser, getYourTweetsHandler);
 router.get('/:id', requireUser, getTweetHandler);
+router.put(
+  '/update/:id',
+  requireUser,
+  validateResource(createTweetSchema),
+  updateTweetHandler
+);
 router.delete('/:id', requireUser, deleteTweetHandler);
 router.post('/like/:id', requireUser, likeTweetHandler);
 router.get('/like/:id', requireUser, getAllLikesTweetHandler);

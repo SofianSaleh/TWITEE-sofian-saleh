@@ -41,6 +41,29 @@ export const getTweet = async (tweetId: string) => {
     throw e;
   }
 };
+
+export const updateTweet = async (
+  tweetId: string,
+  tweet: { content: string },
+  user: any
+) => {
+  try {
+    let oldTweet = await getTweet(tweetId);
+    if (!oldTweet)
+      return { success: false, data: null, msg: `Couldn't find tweet` };
+
+    if (oldTweet.owner._id != user._id)
+      return { success: false, data: null, msg: `Forbidden` };
+
+    oldTweet.content = tweet.content;
+    await oldTweet.save();
+
+    return { success: true, data: oldTweet, msg: `Updated Successfully` };
+  } catch (e: any) {
+    throw e;
+  }
+};
+
 // ! Upgrade to soft delete instade of  earse
 /**
  *

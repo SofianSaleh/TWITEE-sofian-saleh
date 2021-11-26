@@ -6,6 +6,7 @@ export interface TweetDocument extends mongoose.Document {
   owner: [UserDocument['_id']];
   likedUser?: [UserDocument['_id']];
   comments?: [CommentDocument['_id']];
+  isEdited: boolean;
   content: string;
   createdAt: Date;
   updatedAt: Date;
@@ -21,6 +22,7 @@ const TweetSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
+    isEdited: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
