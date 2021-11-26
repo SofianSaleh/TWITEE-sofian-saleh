@@ -1,10 +1,11 @@
-import TweetModel from '../models/tweet.sessio'
+import TweetModel from '../models/tweet.sessio';
 
-export const createNewTweet = await (tweet: Object, user: Object) => {
-    try{
-        tweet.user = user
-        const newTweet = await TweetModel.create(tweet)
-    }catch(e:any){
-        throw e
-    }
-} 
+export const createNewTweet = async (tweet: any, user: any) => {
+  try {
+    tweet.owner = user;
+    const newTweet = await TweetModel.create(tweet);
+    return newTweet;
+  } catch (e: any) {
+    throw e;
+  }
+};
