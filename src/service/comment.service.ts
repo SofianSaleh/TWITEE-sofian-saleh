@@ -79,7 +79,6 @@ export const deleteComment = async (commentId: string, user: any) => {
   try {
     let comment = await getComment(commentId);
     if (!comment.success && !comment.data) return comment;
-
     if (!comment?.data?.owner)
       return { success: false, msg: `User Doesn't exist`, data: null };
 
@@ -87,7 +86,6 @@ export const deleteComment = async (commentId: string, user: any) => {
     if (user._id != comment.data.owner._id)
       return { success: false, comment: null, msg: `Forbidden` };
     await comment.data.remove();
-    await comment.data.save();
     console.log(comment.data);
 
     // const deleteComment = await CommentModel.deleteOne({
