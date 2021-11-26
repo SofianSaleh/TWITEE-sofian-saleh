@@ -53,7 +53,6 @@ export const deleteTweetHandler = async (req: Request, res: Response) => {
     const { id } = req.params;
     const user = res.locals.user;
     const tweet = await deleteTweet(id, user._id);
-    console.log(tweet);
     res
       .status(200)
       .send({ count: tweet ? 1 : 0, tweet, success: tweet ? true : false });

@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
 import logger from '../utils/logger';
-import 'dotenv/config'
+import 'dotenv/config';
 
 async function connect() {
   const dbUri = process.env.dbUri!;
-  console.log(dbUri)
   try {
     await mongoose.connect(dbUri);
     logger.info(`Database Connected`);
