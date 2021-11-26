@@ -6,11 +6,14 @@ import routes from './routes';
 
 import deserializeUser from './middleware/deserializeUser';
 
+import AuthRoutes from './routes/auth.routes';
 const app = express();
-const port = config.get<number>('port');
+const port = process.env.PORT || 2000;
 app.use(express.json());
 
 app.use(deserializeUser);
+
+app.use(`/api/auth`, AuthRoutes);
 
 app.listen(port, async () => {
   await connect();
