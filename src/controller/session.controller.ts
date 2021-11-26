@@ -1,4 +1,3 @@
-import config from 'config';
 import { Request, Response } from 'express';
 import {
   createSession,
@@ -17,13 +16,13 @@ export async function createUserSessionHandler(req: Request, res: Response) {
   // Create an accessToken
   const accessToken = signJwt(
     { ...user, session },
-    { expiresIn: config.get<string>('accessTokenTtl') }
+    { expiresIn: process.env.accessTokenTtl! }
   );
   // Create an refreshToken
 
   const refreshToken = signJwt(
     { ...user, session },
-    { expiresIn: config.get<string>('refreshTokenTtl') }
+    { expiresIn: process.env.refreshTokenTtl! }
   ); // Return access and  refresh Token
 
   return res.status(200).send({ accessToken, refreshToken });

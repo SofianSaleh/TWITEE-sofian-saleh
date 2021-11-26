@@ -18,7 +18,7 @@ router.post(
   createUserSessionHandler
 );
 
-app.get(`sessions`, requireUser, getUserSessionsHandler);
-app.delete(`/logout`, requireUser, deleteSessionHandler);
+router.get(`sessions`, requireUser, getUserSessionsHandler);
+router.delete(`/logout`, requireUser, deleteSessionHandler);
 
 export default router;

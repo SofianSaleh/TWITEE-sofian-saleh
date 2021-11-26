@@ -1,7 +1,7 @@
 import { omit } from 'lodash';
 import { DocumentDefinition, FilterQuery } from 'mongoose';
 import UserModel, { UserDocument } from '../models/user.model';
-
+import 'dotenv/config';
 export const createUser = async (
   input: DocumentDefinition<
     Omit<UserDocument, 'createdAt' | 'updatedAt' | 'comparePassword'>

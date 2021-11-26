@@ -2,8 +2,7 @@ import { FilterQuery, UpdateQuery } from 'mongoose';
 import SessionModel, { SessionDocument } from '../models/session.model';
 import { verifyJwt, signJwt } from '../utils/jwt.utils';
 import { get } from 'lodash';
-import config from 'config';
-
+import 'dotenv/config';
 import { findUser } from './user.service';
 
 export async function createSession(userId: string, userAgent: string) {
@@ -39,7 +38,7 @@ export async function reIssueAccessToken(refreshToken: string) {
   let x = { ...user };
   const accessToken = signJwt(
     { ...user, session: session._id },
-    { expiresIn: config.get<string>('accessTokenTtl') }
+    { expiresIn: process.env.accessTokenTtl! }
   );
 
   return accessToken;
