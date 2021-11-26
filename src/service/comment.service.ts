@@ -24,3 +24,16 @@ export const createComment = async (
     throw e;
   }
 };
+
+export const getAllCommentsOnTweet = async (tweetId: string) => {
+  try {
+    let tweet = await getTweet(tweetId);
+    if (!tweet)
+      return { success: false, msg: `Couldn't find tweet`, tweet: null };
+    tweet = await tweet?.populate('comments');
+    console.log(tweet);
+    return { success: true, tweet, msg: `Found all the comments` };
+  } catch (e: any) {
+    throw e;
+  }
+};

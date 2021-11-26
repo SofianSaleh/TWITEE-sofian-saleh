@@ -5,7 +5,10 @@ import validateResource from '../middleware/validateResource';
 import requireUser from '../middleware/requireUser';
 
 import { createCommentSchema } from '../schema/comment.schema';
-import { createCommentHandler } from '../controller/comment.controller';
+import {
+  createCommentHandler,
+  getAllCommentsOnTweetHandler,
+} from '../controller/comment.controller';
 const router = express.Router();
 
 router.post(
@@ -15,4 +18,5 @@ router.post(
   createCommentHandler
 );
 
+router.get(`/all/:id`, requireUser, getAllCommentsOnTweetHandler);
 export default router;
