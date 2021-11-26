@@ -10,9 +10,8 @@ export const createUserHandler = async (
 ) => {
   try {
     const user = await createUser(req.body);
-    const emailSend = await sendMail({email: user.email, name: user.name})
-    console.log(emailSend)
-    return res.send(user);
+    const { success } = await sendMail({ email: user.email, name: user.name });
+    return res.send({ user, success });
   } catch (e: any) {
     logger.error(e);
     return res.status(409).send(e.message);

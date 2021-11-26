@@ -3,6 +3,7 @@ import { get } from 'lodash';
 import { reIssueAccessToken } from '../service/session.service';
 import { verifyJwt } from '../utils/jwt.utils';
 import logger from '../utils/logger';
+import 'dotenv/config';
 
 const deserializeUser = async (
   req: Request,
@@ -16,7 +17,7 @@ const deserializeUser = async (
   const refreshToken = get(req, 'headers.x-refresh', '');
   if (!accessToken) return next();
 
-  const { decoded, expired } = verifyJwt(accessToken);
+  const { decoded, expired } = verifyJwt(accessToken, process.env.JWT1!);
 
   if (decoded) {
     res.locals.user = decoded;
@@ -27,7 +28,7 @@ const deserializeUser = async (
     if (!!newAccessToken) {
       res.setHeader('x-access-token', newAccessToken);
 
-      const result = verifyJwt(newAccessToken);
+      const result = verifyJwt(newAccessToken, process.env.JWT1);
 
       res.locals.user = result.decoded;
       return next();

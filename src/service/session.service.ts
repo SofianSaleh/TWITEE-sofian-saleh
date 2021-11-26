@@ -25,7 +25,7 @@ export async function updateSessions(
 
 export async function reIssueAccessToken(refreshToken: string) {
   // Verify refreshToken
-  const { decoded, expired } = verifyJwt(refreshToken);
+  const { decoded, expired } = verifyJwt(refreshToken, process.env.JWT2!);
   // If valid return a new access  Token
   if (!decoded && get(decoded, 'session')) return false;
 
@@ -38,6 +38,7 @@ export async function reIssueAccessToken(refreshToken: string) {
   let x = { ...user };
   const accessToken = signJwt(
     { ...user, session: session._id },
+    process.env.JWT1!,
     { expiresIn: process.env.accessTokenTtl! }
   );
 

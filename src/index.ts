@@ -5,6 +5,8 @@ import logger from './utils/logger';
 import deserializeUser from './middleware/deserializeUser';
 
 import AuthRoutes from './routes/auth.routes';
+import TweetRoutes from './routes/tweet.routes';
+
 const app = express();
 const port = process.env.PORT || 2000;
 
@@ -13,6 +15,7 @@ app.use(express.json());
 app.use(deserializeUser);
 app.get(`/healthcheck`, (req: Request, res: Response) => res.sendStatus(200));
 app.use(`/api/auth`, AuthRoutes);
+app.use(`/api/tweet`, TweetRoutes);
 
 app.listen(port, async () => {
   await connect();
