@@ -1,6 +1,6 @@
 import { model, Schema, Document } from 'mongoose';
 import { hashSync, compare, genSalt } from 'bcrypt';
-
+import 'dotenv/config';
 export interface UserDocument extends Document {
   email: string;
   name: string;
@@ -25,8 +25,8 @@ UserSchema.pre('save', async function (next) {
   if (!user.isModified('password')) {
     return next();
   }
-  const salt = await genSalt(process.env.saltWorkFactor!);
-  const hash = await hashSync(user.password, salt);
+  const salt = await genSalt(10);
+  const hash = hashSync(user.password, salt);
   user.password = hash;
   return next();
 });

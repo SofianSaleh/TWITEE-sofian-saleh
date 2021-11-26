@@ -36,10 +36,7 @@ const sendMail = async (info: { name: string; email: string }) => {
       msg: emailVerification,
     };
   } catch (e: any) {
-    return {
-      success: false,
-      msg: e.message,
-    };
+    throw e;
   }
 };
 export default sendMail;
