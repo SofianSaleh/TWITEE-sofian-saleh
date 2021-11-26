@@ -6,10 +6,8 @@ import { createTweetSchema } from '../schema/tweet.schema';
 import {
   createTweetHandler,
   deleteTweetHandler,
-  getAllLikesTweetHandler,
   getTweetHandler,
   getYourTweetsHandler,
-  likeTweetHandler,
   updateTweetHandler,
 } from '../controller/tweets.controller';
 
