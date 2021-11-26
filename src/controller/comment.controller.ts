@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import {
   createComment,
   getAllCommentsOnTweet,
+  getComment,
   updateComment,
 } from '../service/comment.service';
 
@@ -12,6 +13,16 @@ export const createCommentHandler = async (req: Request, res: Response) => {
     const newComment = await createComment(req.body, id, user);
 
     return res.status(200).send(newComment);
+  } catch (e: any) {
+    res.status(400).send(e.message);
+  }
+};
+
+export const getCommentHandler = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const comment = await getComment(id);
+    res.status(200).send(comment);
   } catch (e: any) {
     res.status(400).send(e.message);
   }

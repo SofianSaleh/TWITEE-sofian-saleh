@@ -28,13 +28,13 @@ export const createComment = async (
 //! do a route
 export const getComment = async (commentId: string) => {
   try {
-    const comment = await CommentModel.findOne({ _id: tweetId }).populate(
+    const comment = await CommentModel.findOne({ _id: commentId }).populate(
       'owner',
       'name email'
     );
     if (!comment)
       return { success: false, msg: `Couldn't find comment`, comment: null };
-    return { success: false, msg: `Couldn't find comment`, comment };
+    return { success: true, msg: `Found comment`, comment };
   } catch (e: any) {
     throw e;
   }
@@ -45,7 +45,7 @@ export const getAllCommentsOnTweet = async (tweetId: string) => {
     let tweet = await getTweet(tweetId);
     if (!tweet)
       return { success: false, msg: `Couldn't find tweet`, tweet: null };
-    tweet = await tweet?.populate('comments', 'content owner');
+    tweet = await tweet?.populate('comments', 'content owner isEdited');
     return { success: true, tweet, msg: `Found all the comments` };
   } catch (e: any) {
     throw e;
@@ -53,14 +53,20 @@ export const getAllCommentsOnTweet = async (tweetId: string) => {
 };
 
 export const updateComment = async (
-  comment: any,
+  newContent: any,
   commentId: string,
   user: any
 ) => {
   try {
-    let oldComment = await getComment(commentId);
-    console.log(user._id, oldComment.comment._id);
-    return;
+    let { success, comment, msg } = await getComment(commentId);
+    if (!success) return { success, comment, msg };
+    if (user._id != comment?.owner?.id)
+      return { success: false, comment: null, msg: `Forbidden` };
+    comment?.content = newContent.content;
+    comment?.isEdited = true;
+    await comment?.save();
+
+    return { success: true, comment, msg: `Updated Successfully` };
   } catch (e: any) {
     throw e;
   }

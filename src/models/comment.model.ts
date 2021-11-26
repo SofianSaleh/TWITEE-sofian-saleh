@@ -17,7 +17,7 @@ const CommentSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
-    isEdited: { type: boolean, default: false },
+    isEdited: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
