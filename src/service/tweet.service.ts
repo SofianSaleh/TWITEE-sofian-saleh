@@ -56,6 +56,7 @@ export const updateTweet = async (
       return { success: false, data: null, msg: `Forbidden` };
 
     oldTweet.content = tweet.content;
+    oldTweet.isEdited = true;
     await oldTweet.save();
 
     return { success: true, data: oldTweet, msg: `Updated Successfully` };
