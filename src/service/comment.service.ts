@@ -78,26 +78,23 @@ export const updateComment = async (
 export const deleteComment = async (commentId: string, user: any) => {
   try {
     let comment = await getComment(commentId);
+
     if (!comment.success && !comment.data) return comment;
+
     if (!comment?.data?.owner)
       return { success: false, msg: `User Doesn't exist`, data: null };
 
     // Check if the id of the comment owner is the same as the one who wants to delete it
     if (user._id != comment.data.owner._id)
       return { success: false, comment: null, msg: `Forbidden` };
-    await comment.data.remove();
-    console.log(comment.data);
 
-    // const deleteComment = await CommentModel.deleteOne({
-    //   _id: comment.data._id,
-    // });
-    // console.log({
-    //   success: true,
-    //   data: deleteComment.deletedCount,
-    //   msg: deleteComment.deletedCount
-    //     ? `Deleted Successfully`
-    //     : 'Something wrong',
-    // });
+    await comment.data.remove();
+
+    return {
+      success: true,
+      data: null,
+      msg: `Deleted Successfully`,
+    };
   } catch (e: any) {
     throw e;
   }

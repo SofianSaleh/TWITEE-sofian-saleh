@@ -31,7 +31,5 @@ router.put(
   updateTweetHandler
 );
 router.delete('/:id', requireUser, deleteTweetHandler);
-router.post('/like/:id', requireUser, likeTweetHandler);
-router.get('/like/:id', requireUser, getAllLikesTweetHandler);
 
 export default router;
