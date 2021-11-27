@@ -60,7 +60,7 @@ export const updateTweet = async (
   user: any
 ) => {
   try {
-    let oldTweet = await getTweet(tweetId);
+    let oldTweet: any = await getTweet(tweetId);
     if (!oldTweet)
       return { success: false, data: null, msg: `Couldn't find tweet` };
 

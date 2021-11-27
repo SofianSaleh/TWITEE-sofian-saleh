@@ -59,7 +59,7 @@ export const updateComment = async (
   user: any
 ) => {
   try {
-    let { success, data, msg } = await getComment(commentId);
+    let { success, data, msg }: any = await getComment(commentId);
     if (!success && !data) return { success, data, msg };
 
     if (!data?.owner)
@@ -78,7 +78,7 @@ export const updateComment = async (
 
 export const deleteComment = async (commentId: string, user: any) => {
   try {
-    let comment = await getComment(commentId);
+    let comment: any = await getComment(commentId);
 
     if (!comment.success && !comment.data) return comment;
 
