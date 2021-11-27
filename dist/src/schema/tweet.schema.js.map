@@ -1,0 +1,1 @@
+{"version":3,"file":"tweet.schema.js","sourceRoot":"","sources":["../../../src/schema/tweet.schema.ts"],"names":[],"mappings":";;;AAAA,2BAAqC;AAwFxB,QAAA,iBAAiB,GAAG,IAAA,YAAM,EAAC;IACtC,IAAI,EAAE,IAAA,YAAM,EAAC;QACX,OAAO,EAAE,IAAA,YAAM,EAAC,EAAE,cAAc,EAAE,mBAAmB,EAAE,CAAC;KACzD,CAAC;CACH,CAAC,CAAC"}

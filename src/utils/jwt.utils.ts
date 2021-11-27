@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
-import logger from './logger';
 
 export function signJwt(
   object: Object,

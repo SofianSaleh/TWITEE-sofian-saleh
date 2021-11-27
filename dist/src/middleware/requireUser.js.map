@@ -1,0 +1,1 @@
+{"version":3,"file":"requireUser.js","sourceRoot":"","sources":["../../../src/middleware/requireUser.ts"],"names":[],"mappings":";;AAEA,IAAM,WAAW,GAAG,UAAC,IAAa,EAAE,GAAa,EAAE,IAAkB;IACnE,IAAM,IAAI,GAAG,GAAG,CAAC,MAAM,CAAC,IAAI,CAAC;IAE7B,IAAI,CAAC,IAAI;QAAE,OAAO,GAAG,CAAC,UAAU,CAAC,GAAG,CAAC,CAAC;IAEtC,OAAO,IAAI,EAAE,CAAC;AAChB,CAAC,CAAC;AAEF,kBAAe,WAAW,CAAC"}

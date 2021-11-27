@@ -1,14 +1,14 @@
 {
   "name": "sofian_saleh_twitter_clone",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "./src/index.ts",
   "author": "SofianSaleh <sofiane.saleh11@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "start": "node dist/src/index.js",
     "postinstall": "tsc",
-    "watch-node": "nodemon dist/index.js",
+    "watch-node": "nodemon dist/src/index.js",
     "watch-ts": "tsc -w",
     "deploy": "git add . && git commit -m Heroku && git push heroku master"
   },

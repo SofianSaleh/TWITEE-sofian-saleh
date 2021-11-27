@@ -2,7 +2,6 @@ import { Request, NextFunction, Response } from 'express';
 import { get } from 'lodash';
 import { reIssueAccessToken } from '../service/session.service';
 import { verifyJwt } from '../utils/jwt.utils';
-import logger from '../utils/logger';
 import 'dotenv/config';
 
 const deserializeUser = async (

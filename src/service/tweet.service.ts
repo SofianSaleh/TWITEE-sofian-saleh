@@ -1,5 +1,4 @@
 import TweetModel from '../models/tweet.model';
-import mongoose from 'mongoose';
 /**
  *
  * @param tweet {content: string}

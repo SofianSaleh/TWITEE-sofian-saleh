@@ -1,5 +1,4 @@
 import express from 'express';
-import { createUserHandler } from '../controller/user.controller';
 import validateResource from '../middleware/validateResource';
 
 import requireUser from '../middleware/requireUser';
