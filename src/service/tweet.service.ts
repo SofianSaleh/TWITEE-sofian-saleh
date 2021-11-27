@@ -74,10 +74,12 @@ export const updateTweet = async (
  */
 export const deleteTweet = async (tweetId: string, userId: string) => {
   try {
-    const tweet = await TweetModel.findOneAndDelete({
+    const tweet = await TweetModel.findOne({
       _id: tweetId,
       owner: userId,
     });
+    if (!tweet) return null;
+    await tweet?.remove();
     return tweet;
   } catch (e: any) {
     throw e;

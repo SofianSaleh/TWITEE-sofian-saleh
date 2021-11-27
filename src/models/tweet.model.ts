@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { CommentDocument } from './comment.model';
+import CommentModel, { CommentDocument } from './comment.model';
 import { UserDocument } from './user.model';
 
 export interface TweetDocument extends mongoose.Document {
@@ -26,6 +26,16 @@ const TweetSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+TweetSchema.pre('remove', async function (next) {
+  console.log(this);
+  await CommentModel.deleteMany({
+    _id: {
+      $in: this.comments,
+    },
+  });
+  next();
+});
 
 const TweetModel = mongoose.model<TweetDocument>('Tweet', TweetSchema);
 
