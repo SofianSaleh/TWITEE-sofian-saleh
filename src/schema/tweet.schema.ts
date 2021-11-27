@@ -26,6 +26,8 @@ import { object, string } from 'zod';
  *            type: string
  *        _id:
  *          type: string
+ *        owner:
+ *          $ref: '#/components/schemas/OwnerSchema'
  *        isEdited:
  *          type: boolean
  *        createdAt:
@@ -34,6 +36,15 @@ import { object, string } from 'zod';
  *          type: string
  *        __v:
  *          type: integer
+ *    OwnerSchema:
+ *      type: object
+ *      properties:
+ *        _id:
+ *          type: string
+ *        name:
+ *          type: string
+ *        email:
+ *          type: string
  */
 export const createTweetSchema = object({
   body: object({
