@@ -8,6 +8,7 @@ import AuthRoutes from './routes/auth.routes';
 import TweetRoutes from './routes/tweet.routes';
 import CommentRoutes from './routes/comment.routes';
 import LikeRoutes from './routes/like.routes';
+import swaggerDocs from './utils/swagger';
 
 const app = express();
 const port = process.env.PORT || 2000;
@@ -23,5 +24,6 @@ app.use(`/api/like`, LikeRoutes);
 
 app.listen(port, async () => {
   await connect();
+  swaggerDocs(app, port);
   logger.info(`Listening on port http://localhost:${port}`);
 });
