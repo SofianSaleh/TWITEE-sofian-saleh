@@ -1,7 +1,11 @@
-# Foobar
+# Main
 
 Twitter clone (TWITEE) is an app that allows you to signup, login, tweet, like a tweet and comment on a tweet.
 When you start go to http://localhost:{PORT}/docs for swagger Documentation
+
+# Notes
+
+visit https://twitte-sofian-saleh.herokuapp.com/docs/ for the docs
 
 ## Installation
 
