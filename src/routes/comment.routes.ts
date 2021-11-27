@@ -138,7 +138,7 @@ router.get(`/all/:id`, requireUser, getAllCommentsOnTweetHandler);
 /**
  * @openapi
  * '/api/comment/update/{id}':
- *  post:
+ *  put:
  *     tags:
  *     - Comment
  *     summary: Comment on  a tweet
@@ -171,8 +171,8 @@ router.get(`/all/:id`, requireUser, getAllCommentsOnTweetHandler);
  *                  type: boolean
  *                msg:
  *                  type: string
- *                tweet:
- *                  $ref: '#/components/schemas/CommentsResponse1'
+ *                data:
+ *                  $ref: '#/components/schemas/CommentWithUserSchema'
  *      400:
  *        description: Bad request
  */
@@ -182,5 +182,41 @@ router.put(
   validateResource(createCommentSchema),
   updateCommentHandler
 );
+
+/**
+ * @openapi
+ * '/api/comment/{id}':
+ *  delete:
+ *     tags:
+ *     - Comment
+ *     summary: Comment on  a tweet
+ *     parameters:
+ *       - name: x-refresh
+ *         in: header
+ *         descritpion: A refresh token that was created when you login
+ *         require: true
+ *         type: string
+ *       - name: id
+ *         in: path
+ *         descritpion: Comment id
+ *         require: true
+ *         type: string
+ *     responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                success:
+ *                  type: boolean
+ *                msg:
+ *                  type: string
+ *                data:
+ *                  default: null
+ *      400:
+ *        description: Bad request
+ */
 router.delete(`/:id`, requireUser, deleteCommentHandler);
 export default router;
