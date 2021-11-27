@@ -161,6 +161,54 @@ router.put(
   validateResource(createTweetSchema),
   updateTweetHandler
 );
+
+/**
+ * @openapi
+ * '/api/tweet/{id}':
+ *  delete:
+ *     tags:
+ *     - Tweet
+ *     summary: Delete a tweet
+ *     parameters:
+ *       - name: x-refresh
+ *         in: header
+ *         descritpion: A refresh token that was created when you login
+ *         require: true
+ *         type: string
+ *       - name: id
+ *         in: path
+ *         descritpion: Tweet id
+ *         require: true
+ *         type: string
+ *     responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                success:
+ *                  type: boolean
+ *                msg:
+ *                  type: string
+ *                data:
+ *                  $ref: '#/components/schemas/CreateTweetResponse'
+ *      400:
+ *        description: Bad request
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                success:
+ *                  type: boolean
+ *                msg:
+ *                  type: string
+ *                data:
+ *                  type: string
+ *                  default: null
+ */
 router.delete('/:id', requireUser, deleteTweetHandler);
 
 export default router;
