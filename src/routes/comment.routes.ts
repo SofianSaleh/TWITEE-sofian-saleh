@@ -115,7 +115,7 @@ router.get(`/:id`, requireUser, getCommentHandler);
  *        content:
  *          application/json:
  *            schema:
- *              type:object
+ *              type: object
  *              properties:
  *                success:
  *                  type: boolean
