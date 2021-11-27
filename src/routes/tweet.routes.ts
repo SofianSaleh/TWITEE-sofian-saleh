@@ -12,7 +12,35 @@ import {
 } from '../controller/tweets.controller';
 
 const router = express.Router();
-
+/**
+ * @openapi
+ * '/api/tweet/create':
+ *  post:
+ *     tags:
+ *     - Tweet
+ *     summary: Create a tweet
+ *     parameters:
+ *       - name: x-refresh
+ *         in: header
+ *         descritpion: A refresh token that was created when you login
+ *         require: true
+ *         type: string
+ *     requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *           schema:
+ *              $ref: '#/components/schemas/CreateTweetInput'
+ *     responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/CreateTweetResponse'
+ *      400:
+ *        description: Bad request
+ */
 router.post(
   '/create',
   requireUser,

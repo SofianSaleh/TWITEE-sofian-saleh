@@ -76,7 +76,7 @@ router.post(
  *     - User
  *     summary: Get all user's sessions
  *     security:
- *       - bearerAuth[]:
+ *       - bearerAuth: []
  *     parameters:
  *       - name: x-refresh
  *         in: header
@@ -97,6 +97,34 @@ router.post(
  */
 
 router.get(`/sessions`, requireUser, getUserSessionsHandler);
+
+/**
+ * @openapi
+ * '/api/auth/logout':
+ *  delete:
+ *     tags:
+ *     - User
+ *     summary: Logout and deactivate the session
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: x-refresh
+ *         in: header
+ *         descritpion: A refresh token that was created when you login
+ *         require: true
+ *         type: string
+ *     responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/LoginUserResponse'
+ *      409:
+ *        description: Conflict
+ *      400:
+ *        description: Bad request
+ */
 router.delete(`/logout`, requireUser, deleteSessionHandler);
 
 export default router;
