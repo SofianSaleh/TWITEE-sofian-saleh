@@ -27,6 +27,10 @@ const sendMail = async (info: { name: string; email: string }) => {
     subject: `Welcome to Twitter Clone"`, // Subject line
     html: `<h1>From Sofian Test twitter clone</h1>
         <p> Welcome to our wbsite we hope you enjoy our services </p>
+        <p> Here are your credentials </p>
+        <ul> Here are your credentials </ul>
+        <li> Email: ${info.email} </li>
+        <li> Name: ${info.name} </li>
         `,
   };
   try {

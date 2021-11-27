@@ -1,7 +1,7 @@
 {
-  "name": "sofian_saleh_portfolio_backend",
+  "name": "sofian_saleh_twitter_clone",
   "version": "1.0.0",
-  "main": "index.",
+  "main": "index.ts",
   "author": "SofianSaleh <sofiane.saleh11@gmail.com>",
   "license": "MIT",
   "scripts": {
