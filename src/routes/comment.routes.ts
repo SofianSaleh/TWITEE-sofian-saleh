@@ -85,7 +85,14 @@ router.post(
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/CommentWithUserSchema'
+ *              type: object
+ *              properties:
+ *                success:
+ *                  type: boolean
+ *                msg:
+ *                  type: string
+ *                tweet:
+ *                  $ref: '#/components/schemas/CommentWithUserSchema'
  *      400:
  *        description: Bad request
  */
@@ -127,6 +134,48 @@ router.get(`/:id`, requireUser, getCommentHandler);
  *        description: Bad request
  */
 router.get(`/all/:id`, requireUser, getAllCommentsOnTweetHandler);
+
+/**
+ * @openapi
+ * '/api/comment/update/{id}':
+ *  post:
+ *     tags:
+ *     - Comment
+ *     summary: Comment on  a tweet
+ *     parameters:
+ *       - name: x-refresh
+ *         in: header
+ *         descritpion: A refresh token that was created when you login
+ *         require: true
+ *         type: string
+ *       - name: id
+ *         in: path
+ *         descritpion: Comment id
+ *         require: true
+ *         type: string
+ *     requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *           schema:
+ *              $ref: '#/components/schemas/CreateTweetInput'
+ *     responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                success:
+ *                  type: boolean
+ *                msg:
+ *                  type: string
+ *                tweet:
+ *                  $ref: '#/components/schemas/CommentsResponse1'
+ *      400:
+ *        description: Bad request
+ */
 router.put(
   '/update/:id',
   requireUser,

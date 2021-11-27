@@ -65,7 +65,7 @@ export const updateComment = async (
     if (!data?.owner)
       return { success: false, msg: `User Doesn't exist`, data: null };
     if (user._id != data?.owner?._id)
-      return { success: false, comment: null, msg: `Forbidden` };
+      return { success: false, data: null, msg: `Forbidden` };
     data.content = newContent.content;
     data.isEdited = true;
     await data?.save();
