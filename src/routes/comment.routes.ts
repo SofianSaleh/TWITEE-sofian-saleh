@@ -43,7 +43,14 @@ const router = express.Router();
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/CommentsResponse'
+ *              type: object
+ *              properties:
+ *                success:
+ *                  type: boolean
+ *                msg:
+ *                  type: string
+ *                tweet:
+ *                  $ref: '#/components/schemas/CommentsResponse'
  *      400:
  *        description: Bad request
  */
@@ -54,7 +61,71 @@ router.post(
   createCommentHandler
 );
 
+/**
+ * @openapi
+ * '/api/comment/{id}':
+ *  get:
+ *     tags:
+ *     - Comment
+ *     summary: Get comment with comment id
+ *     parameters:
+ *       - name: x-refresh
+ *         in: header
+ *         descritpion: A refresh token that was created when you login
+ *         require: true
+ *         type: string
+ *       - name: id
+ *         in: path
+ *         descritpion: Comment id
+ *         require: true
+ *         type: string
+ *     responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/CommentWithUserSchema'
+ *      400:
+ *        description: Bad request
+ */
 router.get(`/:id`, requireUser, getCommentHandler);
+
+/**
+ * @openapi
+ * '/api/comment/all/{id}':
+ *  get:
+ *     tags:
+ *     - Comment
+ *     summary: Get comment with comment id
+ *     parameters:
+ *       - name: x-refresh
+ *         in: header
+ *         descritpion: A refresh token that was created when you login
+ *         require: true
+ *         type: string
+ *       - name: id
+ *         in: path
+ *         descritpion: Tweet id
+ *         require: true
+ *         type: string
+ *     responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type:object
+ *              properties:
+ *                success:
+ *                  type: boolean
+ *                msg:
+ *                  type: string
+ *                tweet:
+ *                  $ref: '#/components/schemas/CommentsResponse1'
+ *      400:
+ *        description: Bad request
+ */
 router.get(`/all/:id`, requireUser, getAllCommentsOnTweetHandler);
 router.put(
   '/update/:id',

@@ -11,13 +11,14 @@ export const createComment = async (
     let tweet = await getTweet(tweetId);
     if (!tweet)
       return { success: false, tweet: null, msg: `Couldn't find tweet` };
-    const newComment = await CommentModel.create(comment);
+    let newComment = await CommentModel.create(comment);
     tweet?.comments?.push(newComment);
     await tweet.save();
+    newComment = await newComment.populate('owner', 'name email');
     return {
       success: true,
       tweet,
-      newComment,
+      commentOwner: newComment.owner,
       msg: `Comment creaeted Successfully`,
     };
   } catch (e: any) {

@@ -16,6 +16,32 @@ import { object, string } from 'zod';
  *          type: array
  *          items:
  *            $ref: '#/components/schemas/CommentSchema'
+ *        commentOwner:
+ *            $ref: '#/components/schemas/OwnerSchema'
+ *        _id:
+ *          type: string
+ *        owner:
+ *          $ref: '#/components/schemas/OwnerSchema'
+ *        isEdited:
+ *          type: boolean
+ *        createdAt:
+ *          type: string
+ *        updatedAt:
+ *          type: string
+ *        __v:
+ *          type: integer
+ *    CommentsResponse1:
+ *      type: object
+ *      properties:
+ *        content:
+ *          type: string
+ *        likedUser:
+ *          items:
+ *            type: string
+ *        comments:
+ *          type: array
+ *          items:
+ *            $ref: '#/components/schemas/CommentSchema'
  *        _id:
  *          type: string
  *        owner:
@@ -44,6 +70,23 @@ import { object, string } from 'zod';
  *          type: string
  *        owner:
  *          type: string
+ *        isEdited:
+ *          type: boolean
+ *        _id:
+ *          type: string
+ *        updatedAt:
+ *          type: string
+ *        createdAt:
+ *          type: string
+ *        __v:
+ *          type: integer
+ *    CommentWithUserSchema:
+ *      type: object
+ *      properties:
+ *        content:
+ *          type: string
+ *        owner:
+ *          $ref: '#/components/schemas/OwnerSchema'
  *        isEdited:
  *          type: boolean
  *        _id:
