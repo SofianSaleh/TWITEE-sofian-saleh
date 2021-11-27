@@ -28,7 +28,6 @@ const TweetSchema = new mongoose.Schema(
 );
 
 TweetSchema.pre('remove', async function (next) {
-  console.log(this);
   await CommentModel.deleteMany({
     _id: {
       $in: this.comments,
