@@ -8,6 +8,7 @@ import {
   deleteTweetHandler,
   getTweetHandler,
   getYourTweetsHandler,
+  getTweetsHandler,
   updateTweetHandler,
 } from '../controller/tweets.controller';
 
@@ -47,6 +48,38 @@ router.post(
   validateResource(createTweetSchema),
   createTweetHandler
 );
+/**
+ * @openapi
+ * '/api/tweet':
+ *  get:
+ *     tags:
+ *     - Tweet
+ *     summary: Get all  tweets
+ *     parameters:
+ *       - name: x-refresh
+ *         in: header
+ *         descritpion: A refresh token that was created when you login
+ *         require: true
+ *         type: string
+ 
+ *     responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                count:
+ *                  type: integer
+ *                tweets:
+ *                  type: array
+ *                  items:
+ *                    $ref: '#/components/schemas/CreateTweetResponse'
+ *      400:
+ *        description: Bad request
+ */
+router.get('/', requireUser, getTweetsHandler);
 /**
  * @openapi
  * '/api/tweet/mytweets':

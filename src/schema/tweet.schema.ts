@@ -46,6 +46,46 @@ import { object, string } from 'zod';
  *        email:
  *          type: string
  */
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    AllLikedTweetResponse:
+ *      type: object
+ *      properties:
+ *        content:
+ *          type: string
+ *        likedUser:
+ *          items:
+ *            $ref: '#/components/schemas/OwnerSchema'
+ *        comments:
+ *          type: array
+ *          items:
+ *            type: string
+ *        _id:
+ *          type: string
+ *        owner:
+ *          $ref: '#/components/schemas/OwnerSchema'
+ *        isEdited:
+ *          type: boolean
+ *        createdAt:
+ *          type: string
+ *        updatedAt:
+ *          type: string
+ *        __v:
+ *          type: integer
+ *    OwnerSchema:
+ *      type: object
+ *      properties:
+ *        _id:
+ *          type: string
+ *        name:
+ *          type: string
+ *        email:
+ *          type: string
+ */
+
 export const createTweetSchema = object({
   body: object({
     content: string({ required_error: 'Email is required' }),

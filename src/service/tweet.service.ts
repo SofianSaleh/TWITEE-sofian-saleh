@@ -20,6 +20,18 @@ export const createNewTweet = async (tweet: any, user: any) => {
  * @param userId string
  * @returns an array of tweets following the tweet model
  */
+export const getTweets = async () => {
+  try {
+    return await TweetModel.find();
+  } catch (e: any) {
+    throw e;
+  }
+};
+/**
+ *
+ * @param userId string
+ * @returns an array of tweets following the tweet model
+ */
 export const getYourTweets = async (userId: string) => {
   try {
     return await TweetModel.find({ owner: userId });
