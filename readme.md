@@ -8,8 +8,9 @@ When you start go to http://localhost:{PORT}/docs for swagger Documentation
 Use the package manager [Yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/) to install Mobile App.
 
 ```bash
-git clone https://gitlab.com/mapps_nda/candidate-sofian-backend-20211123.git
-cd candidate-sofian-backend-20211123
+git clone https://github.com/SofianSaleh/TWITEE-sofian-saleh.git
+
+cd <Folder Name>
 yarn or npm install
 code .
 ```
